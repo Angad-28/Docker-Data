@@ -3,3 +3,52 @@
 ###############################################
 
 
+To attach any system folder to the folder inside any container without binding port
+docker run -itv /mnt:/usr/local/apache2/htdocs -d httpd
+
+To attach any system folder to the folder inside any container with binding port
+docker run -itv /mnt:/usr/local/apache2/htdocs -p 8012:80 -d httpd
+
+
+
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# ls
+a  index.html
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# vi index.html
+[root@ip-172-31-19-198 mnt]# cat index.html
+HomePage
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker run -itv /mnt:/usr/local/apache2/htdocs -p 8012:80 -d httpd
+66a45e925d292d809b8ed609f5a4eb739fedccccb5c23d1f46912a8c488a46b3
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED              STATUS              PORTS                                   NAMES
+66a45e925d29   httpd     "httpd-foreground"   12 seconds ago       Up 12 seconds       0.0.0.0:8012->80/tcp, :::8012->80/tcp   fervent_ardinghelli
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker exec -it 66a45e925d29 bash
+root@66a45e925d29:/usr/local/apache2#
+root@66a45e925d29:/usr/local/apache2#
+root@66a45e925d29:/usr/local/apache2# ls
+bin  build  cgi-bin  conf  error  htdocs  icons  include  logs  modules
+root@66a45e925d29:/usr/local/apache2#
+root@66a45e925d29:/usr/local/apache2#
+root@66a45e925d29:/usr/local/apache2# cd htdocs/
+root@66a45e925d29:/usr/local/apache2/htdocs#
+root@66a45e925d29:/usr/local/apache2/htdocs#
+root@66a45e925d29:/usr/local/apache2/htdocs# ls
+a  index.html
+root@66a45e925d29:/usr/local/apache2/htdocs#
+root@66a45e925d29:/usr/local/apache2/htdocs#
+root@66a45e925d29:/usr/local/apache2/htdocs#
+root@66a45e925d29:/usr/local/apache2/htdocs# read escape sequence
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
