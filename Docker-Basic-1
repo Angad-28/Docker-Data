@@ -1,0 +1,46 @@
+To install docker in Linux System -->
+yum install docker -y
+
+To check docker Version -->
+docker -v
+
+To check number of images in system -->
+docker images
+docker image ls
+
+To start docker service -->
+service docker start
+
+To pull any docker image --> hello-world is image name
+docker pull hello-world
+
+To run any docker image -->
+docker run hello-world
+
+To delete any docker image from system -->
+docker rmi -f hello-world
+
+To pull docker image --> here image name is ubuntu:18.04
+docker pull ubuntu:18.04
+
+To make container from any docker image -->
+docker run -i -t ubuntu:18.04 bash
+
+To check number running container on system -->
+docker ps
+dosker ps -a
+
+To check docker statistics -->
+docker stats
+
+To stop any docker running container --> here e have to mention container id in last
+docker container stop 7a845fa6daff
+
+To delete all the data related to docker from system -->
+docker system prune -a -f
+
+To kill multiple docker container from system -->
+docker kill $(docker ps -q)
+
+To delete multiple docker images from system -->
+docker rmi -f $(docker images -q)
