@@ -1,0 +1,79 @@
+ 
+ 
+To kill exixting docker container and Delete exixting docker images from system --->
+docker kill $(docker ps -q) && docker system prune -a -f
+
+To download image and run tomcat container in detach mode and uses volume as /mnt --->
+docker run -d -p 8020:8080 -v /mnt:/usr/local/tomcat/webapps tomcat:8
+
+After this hit your public ip like below --->
+18.222.215.43:8020/sample
+
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# wget https://tomcat.apache.org/tomcat-5.5-doc/appdev/sample/sample.war
+--2022-05-20 10:53:33--  https://tomcat.apache.org/tomcat-5.5-doc/appdev/sample/sample.war
+Resolving tomcat.apache.org (tomcat.apache.org)... 151.101.2.132, 2a04:4e42::644
+Connecting to tomcat.apache.org (tomcat.apache.org)|151.101.2.132|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 4606 (4.5K)
+Saving to: ‘sample.war’
+
+100%[============================================================>] 4,606       --.-K/s   in 0s
+
+2022-05-20 10:53:33 (63.2 MB/s) - ‘sample.war’ saved [4606/4606]
+
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# ls -ltr
+total 8
+-rw-r--r-- 1 root root 4606 Mar 31  2012 sample.war
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker run -d -p 8020:8080 -v /mnt:/usr/local/tomcat/webapps tomcat:8
+Unable to find image 'tomcat:8' locally
+8: Pulling from library/tomcat
+67e8aa6c8bbc: Pull complete
+627e6c1e1055: Pull complete
+0670968926f6: Pull complete
+5a8b0e20be4b: Pull complete
+7a93fb438607: Pull complete
+400f1e54bef0: Pull complete
+f0b65b53f1a4: Pull complete
+dc9d1a029c69: Pull complete
+4fa8c7014729: Pull complete
+8bbd376d56d6: Pull complete
+Digest: sha256:1f5c6d4ad4cbe91cf9d97fa19b0b9fdbf742c171914d2c56f82f3e1105a22482
+Status: Downloaded newer image for tomcat:8
+71e4f2c0af6be3d7d090f0fec96372482f3eb3a7c480691fe6e624d5ad08e3a4
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker ps
+CONTAINER ID   IMAGE      COMMAND             CREATED         STATUS         PORTS                                       NAMES
+71e4f2c0af6b   tomcat:8   "catalina.sh run"   7 seconds ago   Up 7 seconds   0.0.0.0:8020->8080/tcp, :::8020->8080/tcp   nice_elgamal
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# curl ifconfig.me
+18.222.215.43[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# 18.222.215.43:8020/sample  hit like this in your browser
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
