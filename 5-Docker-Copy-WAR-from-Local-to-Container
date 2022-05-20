@@ -1,0 +1,76 @@
+There is sample.war file is already present in /mnt folder
+
+
+To run docker tomcat container in detach mode --->
+docker run -p 8060:8080 -d tomcat:8
+
+
+To go inside container --->
+docker exec -it a22658a028ec bash
+
+
+To copy war file into webapps directory which is inside of container --->
+docker cp sample.war a22658a028ec:/usr/local/tomcat/webapps
+
+
+
+
+[root@ip-172-31-19-198 mnt]# docker run -p 8060:8080 -d tomcat:8
+a22658a028ec174e3c82dfb884273e077ad7e49603c671444aa1b6ac44324456
+[root@ip-172-31-19-198 mnt]# 
+[root@ip-172-31-19-198 mnt]# docker ps
+CONTAINER ID   IMAGE      COMMAND             CREATED          STATUS          PORTS                                       NAMES
+a22658a028ec   tomcat:8   "catalina.sh run"   30 seconds ago   Up 29 seconds   0.0.0.0:8060->8080/tcp, :::8060->8080/tcp   loving_faraday
+[root@ip-172-31-19-198 mnt]# 
+[root@ip-172-31-19-198 mnt]# 
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker exec -it a22658a028ec bash
+root@a22658a028ec:/usr/local/tomcat# 
+root@a22658a028ec:/usr/local/tomcat# ls -ltr
+total 128
+drwxrwxrwx 2 root root     6 Mar 31 16:05 work
+drwxr-xr-x 7 root root    81 Mar 31 16:05 webapps.dist
+-rw-r--r-- 1 root root 16497 Mar 31 16:05 RUNNING.txt
+-rw-r--r-- 1 root root  7136 Mar 31 16:05 RELEASE-NOTES
+-rw-r--r-- 1 root root  3378 Mar 31 16:05 README.md
+-rw-r--r-- 1 root root  1726 Mar 31 16:05 NOTICE
+-rw-r--r-- 1 root root 57011 Mar 31 16:05 LICENSE
+-rw-r--r-- 1 root root  6210 Mar 31 16:05 CONTRIBUTING.md
+-rw-r--r-- 1 root root 19491 Mar 31 16:05 BUILDING.txt
+drwxr-xr-x 2 root root     6 May 12 00:04 webapps
+drwxrwxrwx 2 root root    30 May 12 00:04 temp
+drwxr-xr-x 2 root root  4096 May 12 00:04 lib
+drwxr-xr-x 2 root root   159 May 12 00:04 native-jni-lib
+drwxr-xr-x 2 root root  4096 May 12 00:04 bin
+drwxr-xr-x 1 root root    22 May 20 11:04 conf
+drwxrwxrwx 1 root root   177 May 20 11:04 logs
+root@a22658a028ec:/usr/local/tomcat#
+root@a22658a028ec:/usr/local/tomcat#
+root@a22658a028ec:/usr/local/tomcat#
+root@a22658a028ec:/usr/local/tomcat# cd webapps
+root@a22658a028ec:/usr/local/tomcat/webapps#
+root@a22658a028ec:/usr/local/tomcat/webapps#
+root@a22658a028ec:/usr/local/tomcat/webapps#
+root@a22658a028ec:/usr/local/tomcat/webapps#
+root@a22658a028ec:/usr/local/tomcat/webapps# ls -ltr
+total 0
+root@a22658a028ec:/usr/local/tomcat/webapps#
+root@a22658a028ec:/usr/local/tomcat/webapps#
+root@a22658a028ec:/usr/local/tomcat/webapps# read escape sequence
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# 
+[root@ip-172-31-19-198 mnt]# docker cp sample.war a22658a028ec:/usr/local/tomcat/webapps
+[root@ip-172-31-19-198 mnt]# 
+[root@ip-172-31-19-198 mnt]# 
+[root@ip-172-31-19-198 mnt]# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
+tomcat       8         1b9b129f7bca   8 days ago   679MB
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker ps
+CONTAINER ID   IMAGE      COMMAND             CREATED         STATUS         PORTS                                       NAMES
+a22658a028ec   tomcat:8   "catalina.sh run"   2 minutes ago   Up 2 minutes   0.0.0.0:8060->8080/tcp, :::8060->8080/tcp   loving_faraday
+[root@ip-172-31-19-198 mnt]# 
+[root@ip-172-31-19-198 mnt]#
