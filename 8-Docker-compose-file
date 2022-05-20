@@ -1,0 +1,205 @@
+version: '3'
+services:
+  apache:
+    image: httpd
+    ports:
+    - "30-70:80"
+    volumes:
+    - "/mnt:/usr/local/apache/htdocs"
+  tomcat:
+    image: tomcat:9
+    ports:
+    - "8000-8070:8080"
+    volumes:
+    - "/mnt:/usr/local/tomcat/webapps"
+
+
+
+Make one file using vi docker-compose.yaml into /mnt directory and paste above content into that.
+
+
+To up the container from docker compose --->
+docker-compose up -d
+
+To up the container from docker compose for apache service --->
+docker-compose up -d apache
+
+To up the container from docker compose for tomcat service --->
+docker-compose up -d tomcat
+
+
+
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# cat docker-compose.yaml
+version: '3'
+services:
+  apache:
+    image: httpd
+  tomcat:
+    image: tomcat:9
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker-compose up -d
+Unable to find image 'docker/compose:1.29.2' locally
+1.29.2: Pulling from docker/compose
+339de151aab4: Pull complete
+484a7070e879: Pull complete
+6391cb0e5266: Pull complete
+aaaf585806ed: Pull complete
+Digest: sha256:ae66070588c539b965986dc74e9371e3e62ef71668b72a5eed70de111ed3659e
+Status: Downloaded newer image for docker/compose:1.29.2
+Creating network "mnt_default" with the default driver
+Pulling apache (httpd:)...
+latest: Pulling from library/httpd
+214ca5fb9032: Pull complete
+7cf31a2eeec6: Pull complete
+bf666e57b9f2: Pull complete
+c15a4e94ae6b: Pull complete
+dc25474c7f97: Pull complete
+Digest: sha256:2d1f8839d6127e400ac5f65481d8a0f17ac46a3b91de40b01e649c9a0324dea0
+Status: Downloaded newer image for httpd:latest
+Pulling tomcat (tomcat:9)...
+9: Pulling from library/tomcat
+67e8aa6c8bbc: Pull complete
+627e6c1e1055: Pull complete
+dc9d1a029c69: Pull complete
+4de4e5fcb688: Pull complete
+609fd178d9de: Pull complete
+Digest: sha256:51f2ccf6504cd2a42bf0e3dd8bcefe6a73a318e1a298f9c922ef55c4692add49
+Status: Downloaded newer image for tomcat:9
+Creating mnt_apache_1 ... done
+Creating mnt_tomcat_1 ... done
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker images
+REPOSITORY       TAG       IMAGE ID       CREATED         SIZE
+tomcat           9         a32ad1e7bf43   2 days ago      685MB
+httpd            latest    c58ef9bfbb57   9 days ago      144MB
+docker/compose   1.29.2    32d8a4638cd8   12 months ago   76.2MB
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker ps
+CONTAINER ID   IMAGE      COMMAND              CREATED          STATUS         PORTS      NAMES
+aaa340c4bf81   tomcat:9   "catalina.sh run"    11 seconds ago   Up 9 seconds   8080/tcp   mnt_tomcat_1
+9a8b77dd6489   httpd      "httpd-foreground"   11 seconds ago   Up 9 seconds   80/tcp     mnt_apache_1
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker kill $(docker ps -q) && docker system prune -a -f
+aaa340c4bf81
+9a8b77dd6489
+Deleted Containers:
+aaa340c4bf81a2fede1b923c2f3b8f11d79ab99e946c431c5a3a7173596826e9
+9a8b77dd64895d1da00da2573e77fb2ee667b4c6166fb1b4404ea293c2325562
+
+Deleted Networks:
+mnt_default
+
+Deleted Images:
+Total reclaimed space: 904.8MB
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker-compose up -d apache
+Unable to find image 'docker/compose:1.29.2' locally
+1.29.2: Pulling from docker/compose
+339de151aab4: Pull complete
+aaaf585806ed: Pull complete
+Digest: sha256:ae66070588c539b965986dc74e9371e3e62ef71668b72a5eed70de111ed3659e
+Status: Downloaded newer image for docker/compose:1.29.2
+Creating network "mnt_default" with the default driver
+Pulling apache (httpd:)...
+latest: Pulling from library/httpd
+214ca5fb9032: Pull complete
+dc25474c7f97: Pull complete
+Digest: sha256:2d1f8839d6127e400ac5f65481d8a0f17ac46a3b91de40b01e649c9a0324dea0
+Status: Downloaded newer image for httpd:latest
+Creating mnt_apache_1 ... done
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED         STATUS         PORTS     NAMES
+79efee7f09e7   httpd     "httpd-foreground"   5 seconds ago   Up 3 seconds   80/tcp    mnt_apache_1
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker images
+REPOSITORY       TAG       IMAGE ID       CREATED         SIZE
+httpd            latest    c58ef9bfbb57   9 days ago      144MB
+docker/compose   1.29.2    32d8a4638cd8   12 months ago   76.2MB
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker-compose up -d tomcat
+Pulling tomcat (tomcat:9)...
+9: Pulling from library/tomcat
+67e8aa6c8bbc: Pull complete
+627e6c1e1055: Pull complete
+0670968926f6: Pull complete
+4de4e5fcb688: Pull complete
+609fd178d9de: Pull complete
+Digest: sha256:51f2ccf6504cd2a42bf0e3dd8bcefe6a73a318e1a298f9c922ef55c4692add49
+Status: Downloaded newer image for tomcat:9
+Creating mnt_tomcat_1 ... done
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker images
+REPOSITORY       TAG       IMAGE ID       CREATED         SIZE
+tomcat           9         a32ad1e7bf43   2 days ago      685MB
+httpd            latest    c58ef9bfbb57   9 days ago      144MB
+docker/compose   1.29.2    32d8a4638cd8   12 months ago   76.2MB
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]# docker ps
+CONTAINER ID   IMAGE      COMMAND              CREATED          STATUS          PORTS      NAMES
+c2d95c5bb216   tomcat:9   "catalina.sh run"    10 seconds ago   Up 8 seconds    8080/tcp   mnt_tomcat_1
+79efee7f09e7   httpd      "httpd-foreground"   50 seconds ago   Up 48 seconds   80/tcp     mnt_apache_1
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
+[root@ip-172-31-19-198 mnt]#
