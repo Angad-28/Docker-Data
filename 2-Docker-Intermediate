@@ -1,0 +1,39 @@
+docker run ubuntu:18.04 ping localhost
+docker run -d ubuntu:18.04 ping localhost
+docker run -d ubuntu:18.04 ping
+docker run -d ubuntu:18.04
+docker ps
+docker run -d ubuntu:18.04 bash
+docker ps
+docker attach e893f6c3ed8f
+docker container stop e893f6c3ed8f
+docker container start
+docker container start e893f6c3ed8f
+docker container kill e893f6c3ed8f
+docker system prune -a -f
+docker run -d centos:8 ping localhost -c 50
+docker logs -f 08cec60901a18549ec6f286f3037a1ce11daf453e9b21336dbce89523c4e85e7
+docker ps
+docker search jenkins
+docker ps
+docker run -it ubuntu:18.04 bash
+docker ps
+docker diff 2386f21bf99b
+docker commit 2386f21bf99b yogesh
+docker images
+docker run -ti yogesh bash
+docker search httpd
+docker run -it httpd
+docker run -itd httpd
+docker ps
+docker exec -it 3e23c6f29d09 bash
+yum remove httpd -y
+docker run -itd httpd
+docker ps
+docker run -itp 8888:80 -d httpd
+docker ps
+docker exec -it 7fc6a3612dbd bash
+vi index.html
+docker cp 7fc6a3612dbd:/usr/local/apache2/htdocs/index.html .
+docker cp index.html 7fc6a3612dbd:/usr/local/apache2/htdocs/
+history
