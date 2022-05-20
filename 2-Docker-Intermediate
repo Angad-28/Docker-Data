@@ -1,3 +1,9 @@
+###############################################
+        Docker Intermediate Commands
+###############################################
+
+
+
 Docker container download and run in detach mode ping command --->
 docker run -d centos:8 ping localhost
 
